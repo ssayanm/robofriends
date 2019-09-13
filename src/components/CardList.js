@@ -1,7 +1,7 @@
 import React from 'react';
 import Card from '../components/Card';
 
-function CardList(props) {
+const CardList = (props) => {
 	const { robots } = props;
 	return (
 	    <div className='tc'>

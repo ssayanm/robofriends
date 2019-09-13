@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Scroll(props) {
+const Scroll = (props) => {
 	return (
 	    <div className='tc' style={{overflowY: 'scroll', border: '1px solid #000', height: '800px'}}>
 	    	{props.children}
