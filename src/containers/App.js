@@ -1,11 +1,9 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import CardList from '../components/CardList';
-import SearchBox from '../components/SearchBox';
-import Scroll from '../components/Scroll';
-import ErrorBoundary from '../components/ErrorBoundary';
-import './App.css';
-import { setSearchField, requestRobots } from '../actions';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+
+import "./App.css";
+import { setSearchField, requestRobots } from "../actions";
+import MainPage from "../components/MainPage";
 
 const mapStateToProps = state => {
   return {
@@ -13,40 +11,19 @@ const mapStateToProps = state => {
     robots: state.requestRobots.robots,
     isPending: state.requestRobots.isPending,
     error: state.requestRobots.error
-  }
-}
+  };
+};
 
 const mapDispatchToProps = dispatch => {
   return {
-    onSearchChange: (event) => dispatch(setSearchField(event.target.value)),
+    onSearchChange: event => dispatch(setSearchField(event.target.value)),
     onRequestRobots: () => dispatch(requestRobots())
-  }
-}
+  };
+};
 
 class App extends Component {
-  componentDidMount(){
-    this.props.onRequestRobots();  
-  }
-
-  render(){
-    const { searchField, onSearchChange, robots, isPending } = this.props;
-    const filterRobots = robots.filter(robot => {
-      return robot.name.toLowerCase().includes(searchField.toLowerCase());
-    })
-    
-    return isPending ?
-        <h1>Loading</h1> : 
-      (
-        <div className="App tc">
-          <h1 className="f1">RoboFriends</h1>
-          <SearchBox searchChange={onSearchChange}/>
-          <Scroll>
-            <ErrorBoundary>
-              <CardList robots={filterRobots}/>
-            </ErrorBoundary>  
-          </Scroll>
-        </div>
-      );
+  render() {
+    return <MainPage {...this.props} />;
   }
 }
 
